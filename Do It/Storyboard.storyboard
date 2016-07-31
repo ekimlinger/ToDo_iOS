@@ -22,7 +22,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="SXZ-ZS-eQK" kind="show" id="TcZ-Wm-H1t"/>
+                                    <segue destination="SXZ-ZS-eQK" kind="show" identifier="showDetail" id="TcZ-Wm-H1t"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -139,10 +139,18 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="lqK-fw-vNF">
-                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="eus-Q3-b7o"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="eus-Q3-b7o">
+                            <connections>
+                                <action selector="deleteItem:" destination="SXZ-ZS-eQK" id="gWr-gK-ita"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="notesTextView" destination="kA4-pY-Yvh" id="wXo-Cj-ywZ"/>
+                        <outlet property="titleTextField" destination="CRQ-5c-UoN" id="20W-FB-5dE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fCM-Ux-Smo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
