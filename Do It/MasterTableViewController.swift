@@ -26,7 +26,7 @@ class MasterTableViewController: UITableViewController {
         
         var itemListFromUserDefaults: NSMutableArray? = userDefaults.objectForKey("itemList") as? NSMutableArray
         
-        if((itemListFromUserDefaults) != nil){
+        if(itemListFromUserDefaults != nil){
             toDoItems = itemListFromUserDefaults!
         }
         
@@ -61,7 +61,7 @@ class MasterTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
 
         var toDoItem:NSDictionary = toDoItems.objectAtIndex(indexPath.row) as! NSDictionary
         

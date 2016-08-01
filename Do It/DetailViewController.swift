@@ -13,6 +13,8 @@ class DetailViewController: UIViewController {
     
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var notesTextView: UITextView!
+    @IBOutlet var completedSwitch: UISwitch!
+    
     
     var toDoData : NSDictionary = NSDictionary()
     
@@ -30,9 +32,13 @@ class DetailViewController: UIViewController {
         
         titleTextField.userInteractionEnabled = false;
         notesTextView.userInteractionEnabled = false;
+        completedSwitch.userInteractionEnabled = true;
         
-        titleTextField.text = toDoData.objectForKey("itemTitle") as! String
-        notesTextView.text = toDoData.objectForKey("itemDetail") as! String
+        titleTextField.text = toDoData.objectForKey("itemTitle") as? String
+        notesTextView.text = toDoData.objectForKey("itemDetail") as? String
+        completedSwitch.on = toDoData.objectForKey("itemCompleted")! as! Bool
+        
+        self.view.backgroundColor = UIColor.grayColor()
 
     }
 
@@ -41,6 +47,49 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func completedTask(sender: AnyObject) {
+        print("TODO data:", toDoData)
+        
+        var userDefaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        
+        var itemListArray:NSMutableArray = userDefaults.objectForKey("itemList") as! NSMutableArray
+        
+        var mutableItemList:NSMutableArray = NSMutableArray()
+        
+        for dict:AnyObject in itemListArray{
+            mutableItemList.addObject(dict as! NSMutableDictionary)
+        }
+        
+        var indexToDo:Int = mutableItemList.indexOfObject(toDoData)
+        
+        var tempDict: NSMutableDictionary = toDoData.mutableCopy() as! NSMutableDictionary
+        
+        
+        if(toDoData.objectForKey("itemCompleted")! as! Bool == false){
+            //Task is being completed
+            print("Completing task");
+            
+            tempDict.removeObjectForKey("itemCompleted");
+            tempDict.setObject(true, forKey: "itemCompleted");
+            
+            print("Successfully completed task");
+        }else{
+            //Task is being incompleted
+            print("Changing task to incompleted")
+            
+            tempDict.removeObjectForKey("itemCompleted");
+            tempDict.setObject(false, forKey: "itemCompleted");
+            
+            print("Completing task");
+
+        }
+        mutableItemList[indexToDo] = tempDict as! NSDictionary
+        
+        userDefaults.removeObjectForKey("itemList")
+        userDefaults.setObject(mutableItemList, forKey: "itemList")
+        userDefaults.synchronize()
+        
+    }
     
     @IBAction func deleteItem(sender: AnyObject) {
         

@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Master Table View Controller-->
+        <!--Do it-->
         <scene sceneID="0DR-lx-iBI">
             <objects>
                 <tableViewController id="s2w-eW-67U" customClass="MasterTableViewController" customModule="Do_It" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,10 +31,10 @@
                             <outlet property="delegate" destination="s2w-eW-67U" id="LXL-od-CLE"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="V9J-Fk-Zlg">
+                    <navigationItem key="navigationItem" title="Do it" id="V9J-Fk-Zlg">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="gMd-b4-Icx">
                             <connections>
-                                <segue destination="m4q-7y-cr1" kind="show" id="Xim-j1-rgf"/>
+                                <segue destination="m4q-7y-cr1" kind="show" identifier="showAddVC" id="Xim-j1-rgf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -44,7 +44,7 @@
             </objects>
             <point key="canvasLocation" x="131" y="392"/>
         </scene>
-        <!--Add View Controller-->
+        <!--Add Task-->
         <scene sceneID="BjW-gu-8AR">
             <objects>
                 <viewController id="m4q-7y-cr1" customClass="AddViewController" customModule="Do_It" customModuleProvider="target" sceneMemberID="viewController">
@@ -82,27 +82,28 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="3mX-dQ-lcu">
+                    <navigationItem key="navigationItem" title="Add Task" id="3mX-dQ-lcu">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="0oz-tv-YLI"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="soG-oe-0er">
                             <connections>
-                                <action selector="doneButtonPressed:" destination="m4q-7y-cr1" id="hux-Ly-dYY"/>
+                                <action selector="doneButtonPressed:" destination="m4q-7y-cr1" id="D4e-0J-sxR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="notesTextView" destination="oDs-cH-K5o" id="DIq-on-gR6"/>
-                        <outlet property="titleTextField" destination="wIU-ZQ-PF9" id="iIK-5E-kPE"/>
+                        <outlet property="notesTextView" destination="oDs-cH-K5o" id="myU-qd-l15"/>
+                        <outlet property="titleTextField" destination="wIU-ZQ-PF9" id="GB8-O5-sMZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tm6-cK-Xff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="536" y="81"/>
+            <point key="canvasLocation" x="552" y="52"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--DetailViewController-->
         <scene sceneID="0H2-Em-doi">
             <objects>
-                <viewController id="SXZ-ZS-eQK" customClass="DetailViewController" customModule="Do_It" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="DetailViewController" id="SXZ-ZS-eQK" customClass="DetailViewController" customModule="Do_It" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6aG-xf-cML"/>
                         <viewControllerLayoutGuide type="bottom" id="f2b-nu-Zc9"/>
@@ -134,11 +135,23 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="owd-Ri-kvD">
+                                <rect key="frame" x="20" y="367" width="51" height="31"/>
+                                <connections>
+                                    <action selector="completedTask:" destination="SXZ-ZS-eQK" eventType="valueChanged" id="fWa-qf-LPy"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Completed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rw-UP-7Ft">
+                                <rect key="frame" x="77" y="372" width="89" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="lqK-fw-vNF">
+                    <navigationItem key="navigationItem" title="Review Task" id="lqK-fw-vNF">
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="eus-Q3-b7o">
                             <connections>
                                 <action selector="deleteItem:" destination="SXZ-ZS-eQK" id="gWr-gK-ita"/>
@@ -148,13 +161,14 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="completedSwitch" destination="owd-Ri-kvD" id="dI5-Zo-nST"/>
                         <outlet property="notesTextView" destination="kA4-pY-Yvh" id="wXo-Cj-ywZ"/>
                         <outlet property="titleTextField" destination="CRQ-5c-UoN" id="20W-FB-5dE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fCM-Ux-Smo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="536" y="734"/>
+            <point key="canvasLocation" x="536" y="733"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nmg-Ki-zm6">
