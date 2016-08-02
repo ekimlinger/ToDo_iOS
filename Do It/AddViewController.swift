@@ -27,10 +27,23 @@ class AddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.grayColor()
-        
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
+        
+        //Gradient Background
+        let topColor = UIColor(red: (247/255.0), green: (247/255.0), blue: (247/255.0), alpha: 1)
+        let bottomColor = UIColor(red: (91/255.0), green: (228/255.0), blue: (255/255.0), alpha: 1)
+        
+        let gradientColor: [CGColor] = [topColor.CGColor, bottomColor.CGColor]
+        let gradientLocations: [Float] = [0.0/1.0]
+        
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.colors = gradientColor
+        gradientLayer.locations = gradientLocations
+        
+        gradientLayer.frame = self.view.bounds
+        self.view.layer.insertSublayer(gradientLayer, atIndex: 0)
+        // end gradient
 
         // Do any additional setup after loading the view.
     }
@@ -66,7 +79,7 @@ class AddViewController: UIViewController {
             }
             
             userDefaults.removeObjectForKey("itemList")
-            newMutableList.addObject(dataSet)
+            newMutableList.insertObject(dataSet, atIndex: 0)
             userDefaults.setObject(newMutableList, forKey: "itemList")
             
             

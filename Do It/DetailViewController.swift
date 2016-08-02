@@ -27,6 +27,7 @@ class DetailViewController: UIViewController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +39,20 @@ class DetailViewController: UIViewController {
         notesTextView.text = toDoData.objectForKey("itemDetail") as? String
         completedSwitch.on = toDoData.objectForKey("itemCompleted")! as! Bool
         
-        self.view.backgroundColor = UIColor.grayColor()
+        //Gradient Background
+        let topColor = UIColor(red: (247/255.0), green: (247/255.0), blue: (247/255.0), alpha: 1)
+        let bottomColor = UIColor(red: (91/255.0), green: (228/255.0), blue: (255/255.0), alpha: 1)
+        
+        let gradientColor: [CGColor] = [topColor.CGColor, bottomColor.CGColor]
+        let gradientLocations: [Float] = [0.0/1.0]
+        
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.colors = gradientColor
+        gradientLayer.locations = gradientLocations
+        
+        gradientLayer.frame = self.view.bounds
+        self.view.layer.insertSublayer(gradientLayer, atIndex: 0)
+        // end gradient
 
     }
 
@@ -47,9 +61,10 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
     @IBAction func completedTask(sender: AnyObject) {
-        print("TODO data:", toDoData)
-        
+
         var userDefaults:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         
         var itemListArray:NSMutableArray = userDefaults.objectForKey("itemList") as! NSMutableArray
@@ -67,21 +82,13 @@ class DetailViewController: UIViewController {
         
         if(toDoData.objectForKey("itemCompleted")! as! Bool == false){
             //Task is being completed
-            print("Completing task");
-            
             tempDict.removeObjectForKey("itemCompleted");
             tempDict.setObject(true, forKey: "itemCompleted");
-            
-            print("Successfully completed task");
+
         }else{
             //Task is being incompleted
-            print("Changing task to incompleted")
-            
             tempDict.removeObjectForKey("itemCompleted");
             tempDict.setObject(false, forKey: "itemCompleted");
-            
-            print("Completing task");
-
         }
         mutableItemList[indexToDo] = tempDict as! NSDictionary
         
@@ -89,7 +96,11 @@ class DetailViewController: UIViewController {
         userDefaults.setObject(mutableItemList, forKey: "itemList")
         userDefaults.synchronize()
         
+        self.navigationController?.popToRootViewControllerAnimated(true)
+        
     }
+    
+    
     
     @IBAction func deleteItem(sender: AnyObject) {
         

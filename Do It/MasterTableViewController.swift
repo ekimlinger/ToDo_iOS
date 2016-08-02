@@ -66,9 +66,18 @@ class MasterTableViewController: UITableViewController {
         var toDoItem:NSDictionary = toDoItems.objectAtIndex(indexPath.row) as! NSDictionary
         
         cell.textLabel!.text = toDoItem.objectForKey("itemTitle") as? String
+        
+        if(toDoItem.objectForKey("itemCompleted") as! Bool == true){
+            cell.backgroundColor! = UIColor(red: 212/255, green: 212/255, blue: 212/255, alpha: 1)
+
+        } else{
+            cell.backgroundColor! = UIColor.whiteColor()
+        }
 
         return cell
     }
+    
+    
     
 
     /*
@@ -125,3 +134,5 @@ class MasterTableViewController: UITableViewController {
     
 
 }
+
+
