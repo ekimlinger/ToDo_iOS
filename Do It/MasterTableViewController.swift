@@ -65,15 +65,22 @@ class MasterTableViewController: UITableViewController {
 
         var toDoItem:NSDictionary = toDoItems.objectAtIndex(indexPath.row) as! NSDictionary
         
-        cell.textLabel!.text = toDoItem.objectForKey("itemTitle") as? String
-        
         if(toDoItem.objectForKey("itemCompleted") as! Bool == true){
-            cell.backgroundColor! = UIColor(red: 212/255, green: 212/255, blue: 212/255, alpha: 1)
+            cell.backgroundColor = UIColor.lightGrayColor()
+//            let gradient : CAGradientLayer = CAGradientLayer()
+//            let topColor = UIColor(red: (85/255.0), green: (239/255.0), blue: (203/255.0), alpha: 0.1)
+//            let bottomColor = UIColor(red: (91/255.0), green: (202/255.0), blue: (255/255.0), alpha: 0.5)
+//            var arrayColors:Array<AnyObject> = [topColor.CGColor, bottomColor.CGColor]
+//            gradient.colors=arrayColors
+//            gradient.frame = cell.bounds
+//            cell.layer.insertSublayer(gradient, atIndex: UInt32(indexPath.row))
 
         } else{
             cell.backgroundColor! = UIColor.whiteColor()
         }
-
+ 
+        cell.textLabel!.text = toDoItem.objectForKey("itemTitle") as? String
+        
         return cell
     }
     
